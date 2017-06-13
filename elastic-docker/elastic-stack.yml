@@ -19,7 +19,7 @@ services:
     networks: ['stack']
     # Check that Elasticsearch is responding before hitting it with real requests.
     healthcheck:
-      test: ['CMD', 'curl', '-f', '-u', 'elastic:azz1234', 'http://localhost:9200']
+      test: ['CMD', 'curl', '-f', '-u', 'elastic:changeme', 'http://localhost:9200']
 
   kibana:
     image: docker.elastic.co/kibana/kibana:$ELASTIC_VERSION
