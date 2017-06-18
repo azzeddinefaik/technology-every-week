@@ -4,5 +4,5 @@
   remote_user: ubuntu
   become: yes
   roles:
-    - { role: common,          tags: [ 'common'         ] }
-    - { role: nginx,          tags: [ 'nginx'         ] }
+    - { role: common,         tags: [ 'common' ] }
+    - { role: nginx,          tags: [ 'nginx'   ] }
