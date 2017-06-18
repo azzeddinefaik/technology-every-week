@@ -1,0 +1,36 @@
+---
+
+#- name: download docker official install script
+#  get_url:
+#    dest: '/tmp/get_docker.sh'
+#    force: yes
+#    url: https://get.docker.com
+#    validate_certs: no
+
+- name: copy docker official install script
+  template:
+    dest: '/tmp/get_docker.sh'
+    src: get_docker.sh
+    force: yes
+    mode: 755
+
+- name: replace source uri in the script
+  replace:
+    dest: '/tmp/get_docker.sh'
+    regexp: '{{ item.regexp }}'
+    replace: '{{ item.replace }}'
+    validate: '/bin/sh -n %s'
+  with_items:
+    - regexp: '{{ "https://apt.dockerproject.org" | regex_escape }}'
+      replace: '{{ docker_apt_source_uri | regex_replace("/*$", "") }}'
+    - regexp: '{{ "https://yum.dockerproject.org" | regex_escape }}'
+      replace: '{{ docker_yum_source_uri | regex_replace("/*$", "") }}'
+
+- name: run the script
+  command: '/bin/sh /tmp/get_docker.sh'
+
+- name: install docker
+  pip:
+    name: docker
+    state: present
+    version: '{{ docker_dockerpy_version | default(omit) }}'
