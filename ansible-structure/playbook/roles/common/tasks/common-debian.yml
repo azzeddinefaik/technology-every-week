@@ -1,0 +1,41 @@
+---
+- name: dpkg --configure -a
+  shell: dpkg --configure -a
+  tags:
+    - packages
+    - common
+    - dpkg-reconf
+
+- name: install system pakcages and utils
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=5400 allow_unauthenticated=yes
+  with_items:
+   - ntp
+   - openssl
+   - git
+   - git-core
+   - golang
+   - goaccess
+   - htop
+   - rsyslog
+   - zip
+   - vim
+   - vim-common
+   - curl
+   - multitail
+   - upstart
+   - figlet
+   - python-pip
+   - python3-pip
+   - python-software-properties
+   - apt-transport-https
+   - libfontconfig
+  tags:
+    - packages
+    - common
+
+- name: install pip packages ( aws .. )
+  pip: name=awscli
+  tags:
+    - awscli
+    - common
+    - packages

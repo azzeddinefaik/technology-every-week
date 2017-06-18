@@ -1,0 +1,31 @@
+---
+- name: ensure apt official nginx key
+  apt_key: url=http://nginx.org/keys/nginx_signing.key
+  tags:
+    - full-deploy
+    - nginx-deploy
+
+- name: add nginx ppa
+  apt_repository: repo='{{item}}' update_cache=yes
+  with_items:
+    - "deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx"
+    - "deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx"
+
+  tags:
+    - full-deploy
+    - nginx-deploy
+
+- name: ensure /etc/nginx/sites-enabled exist
+  file: path="/etc/nginx/sites-enabled" state=directory owner=root group=root mode=0777 recurse=yes
+  tags:
+    - full-deploy
+    - nginx-deploy
+
+- name: install nginx packages
+  apt: name={{item}} state=present
+  with_items:
+    - nginx
+  tags:
+    - full-deploy
+    - nginx-deploy
+

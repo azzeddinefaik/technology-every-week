@@ -1,0 +1,56 @@
+---
+- name: include common debian
+  include: common-debian.yml
+  when: is_ubuntu
+  tags:
+    - common-deploy
+    - common-pkgs
+
+- name: include common redhat
+  include: common-redhat.yml
+  when: is_redhat
+  tags:
+    - common-deploy
+    - common-pkgs
+
+- name: include limits
+  include: limits.yml
+  vars:
+    # todo hotfix till ansible python3 release fix
+    ansible_python_interpreter: /usr/bin/python
+  tags:
+    - limits-deploy
+
+- name: include zsh ubuntu
+  include: zsh.yml
+  vars:
+    user: ubuntu
+  when: is_ubuntu
+  tags:
+    - common-deploy
+    - zsh-deploy
+
+- name: include zsh centos
+  include: zsh.yml
+  vars:
+    user: centos
+  when: is_centos
+  tags:
+    - common-deploy
+    - zsh-deploy
+
+- name: include zshroot
+  include: zsh.yml
+  vars:
+    user: root
+    home_dir: '/'
+  tags:
+    - common-deploy
+    - zsh-deploy
+
+- name: include keys
+  include: keys.yml
+  tags:
+    - keys-deploy
+    - common-deploy
+

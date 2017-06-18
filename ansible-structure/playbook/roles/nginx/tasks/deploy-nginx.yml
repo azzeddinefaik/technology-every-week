@@ -1,0 +1,14 @@
+---
+- name: transfer sites-enabled nginx configuration
+  template: src={{ item }} dest={{ nginx_dir }}/sites-enabled/{{ item | basename }} force=no
+  with_fileglob:
+    - ../templates/files/sites-enabled/*.*
+  tags:
+    - nginx-deploy
+
+- name: change nginx ownership
+  action: file state=directory recurse=yes path={{ nginx_dir }} owner=root group=root mode=0755
+  notify:
+    - reload nginx
+  tags:
+    - nginx-deploy

@@ -1,0 +1,13 @@
+---
+
+## General Variables
+user: ubuntu
+www_user: www-data
+pbname: $inventory_hostname
+distro: ${ansible_distribution}
+pkg_mgr: ${ansible_pkg_mgr}
+zsh_theme: steeef
+all_git_key: /home/ubuntu/.ssh/id_rsa_deploy_all
+
+
+

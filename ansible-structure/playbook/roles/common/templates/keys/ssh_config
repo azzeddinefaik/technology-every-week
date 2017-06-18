@@ -1,0 +1,9 @@
+#{{ ansible_managed }}
+Host *
+  StrictHostKeyChecking no
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_deploy_all
+  IdentitiesOnly yes

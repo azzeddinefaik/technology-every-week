@@ -1,0 +1,61 @@
+---
+- name: create {{ nginx_dir }}/site.d folder
+  file: path={{ nginx_dir }}/site.d/ state=directory owner=root
+  tags:
+    - nginx-deploy
+
+- name: create {{ nginx_dir }}/sites-available folder
+  file: path={{ nginx_dir }}/sites-available state=directory owner=root
+  tags:
+    - nginx-deploy
+
+- name: create {{ nginx_dir }}/sites-enabled folder
+  file: path={{ nginx_dir }}/sites-enabled state=directory owner=root
+  tags:
+    - nginx-deploy
+
+- name: transfer common site.d nginx configuration
+  template: src={{ item }} dest={{ nginx_dir }}/site.d/{{ item | basename }} force=yes
+  with_fileglob:
+    - ./../../files/nginx/site.d/*.conf
+  tags:
+    - nginx-deploy
+
+- name: create /etc/ssl/certs/ folder
+  file: path=/etc/ssl/certs/ state=directory owner=root group=root
+  tags:
+    - nginx-deploy
+
+- name: create /etc/ssl/private/ folder
+  file: path=/etc/ssl/private/ state=directory owner=root group=root
+  tags:
+    - nginx-deploy
+
+- name: transfer ssl crt (domain-chained.crt) configuration
+  template: src={{ item }} dest=/etc/ssl/certs/{{ item | basename }} force=yes
+  with_fileglob:
+    - ./../ssl/*/*.crt
+  tags:
+    - nginx-deploy
+
+- name: transfer ssl pem (domain-private-key.pem) configuration
+  template: src={{ item }} dest=/etc/ssl/private/{{ item | basename }} force=yes
+  with_fileglob:
+    - ./../ssl/*/*-key.pem
+  tags:
+    - nginx-deploy
+
+- name: transfer sites-available/default nginx configuration
+  template: src={{ item }} dest={{ nginx_dir }}/sites-enabled/{{ item | basename }} owner=root group=root mode=0755 force=yes
+
+  with_fileglob:
+    - ./../../files/nginx/sites-enabled/*.conf
+  tags:
+    - nginx-deploy
+
+- name: transfer nginx.conf nginx configuration
+  template: src={{ item }} dest={{ nginx_dir }}/{{ item | basename }} owner=root group=root mode=0755 force=yes
+  with_fileglob:
+    - ./../../files/nginx/etc_nginx/*
+  tags:
+    - nginx-deploy

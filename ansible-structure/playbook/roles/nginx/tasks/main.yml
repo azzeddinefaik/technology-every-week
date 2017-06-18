@@ -1,0 +1,18 @@
+---
+- name: configure nginx
+  include: install.yml
+  tags:
+    - full-deploy
+    - nginx-deploy
+
+- name: configure nginx
+  include: base-configure.yml
+  tags:
+    - full-deploy
+    - nginx-deploy
+
+- name: configure nginx
+  include: deploy-nginx.yml
+  tags:
+    - full-deploy
+    - nginx-deploy
