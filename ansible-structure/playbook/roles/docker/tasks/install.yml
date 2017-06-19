@@ -1,12 +1,4 @@
 ---
-
-#- name: download docker official install script
-#  get_url:
-#    dest: '/tmp/get_docker.sh'
-#    force: yes
-#    url: https://get.docker.com
-#    validate_certs: no
-
 - name: copy docker official install script
   template:
     dest: '/tmp/get_docker.sh'

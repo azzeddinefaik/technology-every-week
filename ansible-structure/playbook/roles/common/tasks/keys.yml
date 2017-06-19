@@ -6,46 +6,15 @@
   tags:
     - ssh-config
 
-- name: transfer global deployment Key id_rsa_deploy_all
-  template: src="./../../../ssh/keys/id_rsa_deploy_all" dest=/root/.ssh/id_rsa_deploy_all owner=root group=root mode=0600 force=yes
-  tags:
-    - keys-deploy
-    - keys-global-deploy
 
 - name: transfer global deployment Key ubuntu id_rsa_deploy_all
-  template: src="./../../../ssh/keys/id_rsa_deploy_all" dest=/home/ubuntu/.ssh/id_rsa_deploy_all owner=ubuntu group=ubuntu mode=0600 force=yes
-  when: Env == 'dev' or Env == 'live' or Env == 'test'
+  template: src="./../../../ssh/keys/deploy_all" dest=/home/ubuntu/.ssh/deploy_all owner=ubuntu group=ubuntu mode=0600 force=yes
   tags:
     - keys-deploy
     - keys-ubuntu-deploy
 
-- name: ssh keys base
-  authorized_key: user=ubuntu key="{{ lookup('file', item ) }}" exclusive=yes
-  with_fileglob:
-    - ./../../../ssh/keys/base/authorized_keys.pub
-  when: Env == 'dev' or Env == 'live'
-  tags:
-    - keys
-    - ssh-keys
-    - ssh-keys-new
 
-- name: ssh keys dev
-  authorized_key: user=ubuntu key="{{ lookup('file', item ) }}"
-  with_fileglob:
-    - ./../../../ssh/keys/dev/*.pub
-  when: Env is defined and Env|lower == 'dev'
-  tags:
-    - keys
-    - ssh-keys
-    - ssh-keys-new
 
-- name: ssh keys live
-  authorized_key: user=ubuntu key="{{ lookup('file', item ) }}"
-  with_fileglob:
-    - ./../../../ssh/keys/live/*.pub
-  when: Env is defined and Env|lower == 'live'
-  tags:
-    - keys
-    - ssh-keys
-    - ssh-keys-new
+
+
 
