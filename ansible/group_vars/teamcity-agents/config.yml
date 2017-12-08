@@ -1,0 +1,7 @@
+---
+teamcity_agent_workspace_dir: "/opt/teamcity-agent-{{ EcName }}-{{ AID }}"
+teamcity_agent_startup_dir: "{{ teamcity_agent_workspace_dir }}/config"
+teamcity_agent_url: "https://teamcity.tajawal.io/update/buildAgent.zip"
+teamcity_agent_name: "{{ EcName }}-{{ AID }}"
+teamcity_user: ubuntu
+teamcity_group: ubuntu

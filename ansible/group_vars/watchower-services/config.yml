@@ -1,0 +1,6 @@
+---
+watchtower_server_opt_dir: /opt/watchtower-server
+watchtower_user: root
+watchtower_group: root
+
+

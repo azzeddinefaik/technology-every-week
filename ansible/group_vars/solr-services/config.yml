@@ -1,0 +1,22 @@
+---
+solr_version: 6.6.0
+solr_publish_port: 8983
+
+solr_opt_dir: "/opt/solr-server"
+solr_data_dir: "{{ solr_opt_dir }}/data"
+solr_log_dir: "{{ solr_opt_dir }}/log"
+solr_config_dir: "{{ solr_opt_dir }}/config"
+solr_tmp_dir: "{{ solr_opt_dir }}/tmp"
+solr_core_dir: "{{ solr_opt_dir }}/solr-cores"
+
+oms_core: true
+solr_core_oms_dir: "{{ solr_core_dir }}/oms"
+solr_core_oms_conf_dir: "{{ solr_core_oms_dir }}/conf"
+solr_core_oms_data_dir: "{{ solr_core_oms_dir }}/data"
+
+hotel_core: false
+solr_core_hotel_dir: "{{ solr_core_dir }}/hotel"
+solr_core_hotel_conf_dir: "{{ solr_core_hotel_dir }}/conf"
+solr_core_hotel_data_dir: "{{ solr_core_hotel_dir }}/data"
+
+

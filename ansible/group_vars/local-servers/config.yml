@@ -1,0 +1,15 @@
+---
+
+## general vars
+all_git_key: /home/ubuntu/.ssh/id_rsa_deploy_all
+
+# mongodb installation settings
+mongodb_dep_repo: "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse"
+
+
+## swarm-ui
+swarm_server_opt_dir: /opt/swarm-server
+swarm_server_data_dir: "{{ swarm_server_opt_dir }}/data"
+docker_service_path: "/lib/systemd/system/"
+
+

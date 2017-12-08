@@ -1,0 +1,96 @@
+---
+## general vars
+all_git_key: /home/ubuntu/.ssh/id_rsa_deploy_all
+
+## api
+api_server_opt_dir: "/opt/api-server-{{ AID }}"
+
+api_server_php_startup_dir: "{{ api_server_opt_dir }}/php-startup"
+api_server_php_config_dir: "{{ api_server_opt_dir }}/php"
+api_server_php_pool_dir: "{{ api_server_php_config_dir }}/pool"
+api_server_php_modules_dir: "{{ api_server_php_config_dir }}/modules"
+
+api_server_db_dir: "{{ api_server_config_dir }}/db-init"
+api_server_workspace_dir: "{{ api_server_opt_dir }}/workspace"
+api_server_app_config_dir: "{{ api_server_workspace_dir }}/app-config"
+
+api_server_builds_dir: "{{ api_server_workspace_dir }}/builds"
+api_server_builds_logs_dir: "{{ api_server_builds_dir }}/logs"
+api_server_build_scripts_dir:  "{{ api_server_workspace_dir }}/build_scripts"
+
+api_server_nginx_startup_dir: "{{ api_server_opt_dir }}/nginx-startup"
+api_server_php_log_dir: "{{ api_server_workspace_dir }}/php-log"
+
+api_server_nginx_dir: "{{ api_server_workspace_dir }}/nginx"
+api_server_nginx_log_dir: "{{ api_server_workspace_dir }}/nginx-log"
+api_server_sited_dir: "{{ api_server_nginx_dir }}/site.d"
+api_server_sitesavailable_dir: "{{ api_server_nginx_dir }}/sites-available"
+api_server_sitesenabled_dir: "{{ api_server_nginx_dir }}/sites-enabled"
+api_server_snippets_dir: "{{ api_server_nginx_dir }}/snippets"
+api_server_ssl_dir: "{{ api_server_nginx_dir }}/ssl"
+api_server_parser_scripts_dir:  "log-parser"
+api_server_bash_framework_dir:  "bash_framework"
+
+api_server_ci_tools_setting_dir: "{{ api_server_workspace_dir }}/settings"
+
+api_user: "ubuntu"
+api_group: "ubuntu"
+
+## mariadb
+mariadb_root_password: JPr3Xe9qXdW5
+
+mariadb_databases:
+
+  - name: "flight_api_{{ AID }}"
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: "hotel_api_{{ AID }}"
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: "tajawal_api_{{ AID }}"
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: "tajawal_api_testing_{{ AID }}"
+    encoding: utf8
+    collation: utf8_general_ci
+
+mariadb_users:
+  - name: super
+    host: "%"
+    password: EyjAwHAN5Ar9X2
+    priv: "*.*:ALL"
+
+  - name: flight
+    host: "%"
+    password: EyjAwHAN5Ar9
+    priv: "flight_api.*:ALL"
+
+  - name: hotel
+    host: "%"
+    password: EyjAwHAN5Ar9
+    priv: "hotel_api.*:ALL"
+
+api_repos:
+  - dir: "{{ api_server_parser_scripts_dir }}"
+    repo: "git@github.com:tajawal/ci-parser.git"
+
+  - dir: "{{ api_server_bash_framework_dir }}"
+    repo: "git@github.com:niieani/bash-oo-framework.git"
+
+# exposed ports
+ssh_port: "{{ ( 2220 + AID ) | int }}"
+https_port: "{{ ( 8443 + AID ) | int }}"
+http_port: "{{ ( 8080 + AID ) | int }}"
+http_80_port: "{{ ( 9080 + AID ) | int }}"
+php_port: "{{ ( 9110 + AID ) | int }}"
+
+
+#
+teamcity_agent_workspace_dir: "{{ api_server_workspace_dir }}/BuildAgent"
+teamcity_agent_url: "https://teamcity.tajawal.io/update/buildAgent.zip"
+teamcity_agent_name: "api-agent-{{ AID }}"
+teamcity_user: ubuntu
+teamcity_group: ubuntu

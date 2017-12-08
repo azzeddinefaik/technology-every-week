@@ -1,0 +1,49 @@
+---
+## general vars
+mariadb_root_password: JPr3Xe9qXdW5
+all_git_key: /home/ubuntu/.ssh/id_rsa_deploy_all
+
+## mariadb
+
+mariadb_server_opt_dir: /opt/mariadb-server
+mariadb_server_config_dir: "{{ mariadb_server_opt_dir }}/config"
+mariadb_server_data_dir: "{{ mariadb_server_opt_dir }}/data"
+mariadb_user: root
+mariadb_group: root
+mariadb_server_port: 3306
+
+## mongodb
+
+mongodb_server_opt_dir: "/opt/mongodb-server-{{ AID }}"
+mongodb_server_data_dir: "{{ mongodb_server_opt_dir }}/data"
+mongodb_server_log_dir: "{{ mongodb_server_opt_dir }}/log"
+mongodb_user: mongodb
+mongodb_group: mongodb
+mongodb_server_port: 27017
+
+## redis
+
+redis_server_opt_dir: /opt/redis-server
+redis_server_config_dir: "{{ redis_server_opt_dir }}/config"
+redis_server_data_dir: "{{ redis_server_opt_dir }}/data"
+redis_server_version: 3.0.7
+redis_user: root
+redis_group: root
+redis_server_port: 6380
+
+
+## ES
+
+elasticsearch_server_opt_dir: /opt/elasticsearch-server
+elasticsearch_server_config_dir: "{{ elasticsearch_server_opt_dir }}/config"
+elasticsearch_server_data_dir: "{{ elasticsearch_server_opt_dir }}/data"
+elasticsearch_server_log_dir: "{{ elasticsearch_server_opt_dir }}/log"
+elasticsearch_server_port1: 9200
+elasticsearch_server_port2: 9300
+
+#rabbitmq
+rabbitmq_server_opt_dir: /opt/rabbitmq-server
+rabbitmq_server_config_dir: "{{ rabbitmq_server_opt_dir }}/config"
+rabbitmq_server_log_dir: "{{ rabbitmq_server_opt_dir }}/logs"
+rabbitmq_user: root
+rabbitmq_group: root
