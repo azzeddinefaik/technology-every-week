@@ -34,3 +34,6 @@
   file:
     path: "{{ gcloud_tmp_path }}/run_install.sh"
     state: absent
+
+- name: move gcloud bin to /usr/local/bin
+  command: ln -s "{{ gcloud_install_path }}/google-cloud-sdk/bin/gcloud" /usr/local/bin/gcloud
