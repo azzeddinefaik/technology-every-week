@@ -1,0 +1,10 @@
+# Dev {{ ansible_managed }}
+
+Host *
+    StrictHostKeyChecking no
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/githubkey
+  IdentitiesOnly yes
