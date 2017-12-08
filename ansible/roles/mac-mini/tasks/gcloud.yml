@@ -1,0 +1,36 @@
+---
+- name: Insure temp path exists
+  file:
+    path: "{{ gcloud_tmp_path }}"
+    state: directory
+
+- name: Download the archive
+  get_url:
+    url: "{{ gcloud_archive_url }}"
+    dest: "{{ gcloud_tmp_path }}/{{ gcloud_archive_name }}"
+    force: "{{ gcloud_force_download }}"
+
+- name: Unarchive azz
+  shell: cd "{{ gcloud_install_path }}" && tar xvzf "/tmp/install_gcloud/google-cloud-sdk-182.0.0-darwin-x86_64.tar.gz"
+
+- name: Build run script
+  template:
+    src: "{{ role_path }}/templates/run.j2"
+    dest: "{{ gcloud_tmp_path }}/run_install.sh"
+    mode: 0755
+  tags:
+    - copy
+    - download
+
+- name: Install
+  command: "{{ gcloud_tmp_path }}/run_install.sh"
+
+- name: Remove the archive
+  file:
+    path: "/tmp/install_gcloud/google-cloud-sdk-182.0.0-darwin-x86_64.tar.gz"
+    state: absent
+
+- name: Remove the script
+  file:
+    path: "{{ gcloud_tmp_path }}/run_install.sh"
+    state: absent

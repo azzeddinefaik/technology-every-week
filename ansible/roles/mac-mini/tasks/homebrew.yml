@@ -1,0 +1,13 @@
+---
+- homebrew_cask: name={{ item }} state=present
+  ignore_errors: true
+  with_items:
+  - teamviewer
+  - cheatsheet
+  - virtualbox
+  - expandrive
+  - 1password
+  - dash
+  - cord
+  - shimo
+  - puppet-agent #https://downloads.puppetlabs.com/mac/10.11/PC1/x86_64/puppet-agent-1.8.2-1.osx10.11.dmg

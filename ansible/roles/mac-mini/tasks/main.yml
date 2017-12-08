@@ -1,0 +1,29 @@
+---
+
+- name: install homebrew packagers
+  include: homebrew.yml
+  tags:
+    - homebrew
+    - mac
+    - apple
+
+- name: install brew packagers
+  include: brew.yml
+  tags:
+    - brew
+    - mac
+    - apple
+
+- name: install keys
+  include: keys.yml
+  tags:
+    - mac
+    - apple
+    - keys
+
+- name: gcloud
+  include: gcloud.yml
+  tags:
+    - mac
+    - apple
+    - keys

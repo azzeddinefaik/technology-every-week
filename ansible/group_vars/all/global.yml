@@ -1,0 +1,70 @@
+---
+## general vars
+mariadb_root_password: JPr3Xe9qXdW5
+all_git_key: /home/ubuntu/.ssh/id_rsa_deploy_all
+
+# ssh_key path
+ssh_key_path: /home/ubuntu/.ssh/id_rsa_dockerdevops
+
+## redis redis:3.2.8-alpine
+redis_version: 3.2.10
+
+## mariadb
+mariadb_version: 10.1.22
+## mysql
+mysql_version: 10.1.22
+
+## es
+es_version: 5.4.0
+
+## mongodb tajawalcom/mongo:3.4.3-alpine
+mongodb_version: 3.4.7
+
+#
+rabbitmq_version: 3.6.9-management
+
+## teamcity
+teamcity_agent_url: "https://teamcity.tajawal.io/update/buildAgent.zip"
+teamcity_agent_name: "{{ hostvars[inventory_hostname].EcName }}"
+teamcity_user: ubuntu
+teamcity_group: ubuntu
+
+# services names
+mariadb_service: "mariadb_1"
+mongodb_service: "mongo_1"
+es_service: "es_1"
+redis_service: "redis_1"
+rabbitmq_service: "rabbitmq_1"
+
+# services ext Ips :
+api_ip: "{{ansible_default_ipv4.address}}"
+mariadb_ip: "{{ansible_default_ipv4.address}}"
+mongo_ip: "{{ansible_default_ipv4.address}}"
+frontend_ip: "{{ansible_default_ipv4.address}}"
+elasticsearch_ip: "{{ansible_default_ipv4.address}}"
+redis_ip: "{{ansible_default_ipv4.address}}"
+
+# container ips
+php_container_ip: "10.3.0.{{ (10 + AID ) | int }}"
+nginx_container_ip: "10.3.0.{{ (20 + AID ) | int }}"
+mongo_container_ip: "10.3.0.{{ (30 + AID )  | int }}"
+mariadb_container_ip:  "10.3.0.{{ (40 + AID )  | int }}"
+elasticsearch_container_ip: "10.3.0.{{ (50 + AID )  | int }}"
+redis_container_ip:  "10.3.0.{{ (60 + AID )  | int }}"
+frontend_container_ip:  "10.3.0.{{ (70 + AID )  | int }}"
+swarm_ui_ip: "10.3.0.{{ (90 + AID ) | int }}"
+gocd_container_ip: "10.3.0.{{ (110 + AID ) | int }}"
+solr_container_ip: "10.3.0.{{ (120 + AID ) | int }}"
+
+
+sleep_time: 15
+redis_server_port: 6380
+
+is_debian: ansible_os_family | lower == 'debian'
+is_ubuntu: ansible_os_family | lower == 'debian'
+
+is_centos: ansible_os_family | lower == 'redhat'
+is_redhat: ansible_os_family | lower == 'redhat'
+
+is_mac: ansible_distribution | lower == 'MacOSX'
+

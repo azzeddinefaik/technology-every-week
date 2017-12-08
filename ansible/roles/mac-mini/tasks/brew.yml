@@ -1,0 +1,24 @@
+---
+- homebrew: name={{ item }} state=present
+  ignore_errors: true
+  with_items:
+  - wget
+  - htop
+  - docker-machine
+  - docker-compose
+  - zsh
+  - zsh-completions
+  - git
+  - golang
+  - goaccess
+  - htop
+  - rsyslog
+  - vim
+  - curl
+  - multitail
+  - figlet
+  - node
+  - terraform
+  - kubectl
+
+

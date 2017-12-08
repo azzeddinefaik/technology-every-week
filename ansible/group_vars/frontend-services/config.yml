@@ -1,0 +1,32 @@
+---
+## frontend
+
+frontend_server_opt_dir: "/opt/frontend-server-{{AID}}"
+frontend_server_config_dir: "{{ frontend_server_opt_dir }}/config"
+frontend_server_workspace_dir: "{{ frontend_server_opt_dir }}/workspace"
+
+frontend_server_builds_dir: "{{ frontend_server_workspace_dir }}/builds"
+frontend_server_builds_logs_dir: "{{ frontend_server_builds_dir }}/logs"
+frontend_server_teamcityagent_dir: "{{ frontend_server_workspace_dir }}/BuildAgent"
+frontend_server_build_scripts_dir: "{{ frontend_server_workspace_dir }}/build_scripts"
+frontend_server_app_config_dir: "{{ frontend_server_workspace_dir }}/app-config"
+frontend_server_parser_scripts_dir:  "log-parser"
+
+teamcity_agent_workspace_dir: "{{ frontend_server_workspace_dir }}/BuildAgent"
+teamcity_agent_url: "https://teamcity.tajawal.io/update/buildAgent.zip"
+teamcity_agent_name: "frontend-{{ AID }}"
+
+frontend_user: "ubuntu"
+frontend_group: "ubuntu"
+
+frontend_repos:
+
+  - dir: "{{ frontend_server_parser_scripts_dir }}"
+    repo: "git@github.com:tajawal/ci-parser.git"
+
+
+# exposed ports
+ssh_port: "{{ ( 2210 + AID ) | int }}"
+https_port: "{{ ( 8433 + AID ) | int }}"
+http_port: "{{ ( 8090 + AID ) | int }}"
+http_80_port: "{{ ( 9090 + AID ) | int }}"

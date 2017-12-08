@@ -1,0 +1,6 @@
+---
+- hosts: mac-mini
+  remote_user: azzeddine.faik
+  become_user: yes
+  roles:
+    - { role: mac-mini,                   tags: [ 'mac-mini'         ] }
